@@ -12,6 +12,7 @@ function App() {
         <NumericInput 
           value={numericValue}
           onChange={(value) => setNumericValue(() => value)}
+          allowNegative={true}
           className="rounded-lg px-3 py-2 shadow text-lg text-emerald-600"
         />
         <CurrencyInput 

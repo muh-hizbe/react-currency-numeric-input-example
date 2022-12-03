@@ -1,11 +1,19 @@
 import { useRef } from "react"
+import { handleNegativeValue } from "./utils/handlingNegativeValue"
 import { _renderCurrency } from "./utils/number"
 
-export const CurrencyInput = ({ value = 0, onChange, className, ...props }) => {
+export const CurrencyInput = ({ value = 0, onChange, className, allowNegative = true, ...props }) => {
     const inputRef = useRef()
 
     const handleChange = (e) => {
-        const result = e.target.value.replace(/\D/g, '')
+        let rawText = e.target.value
+        let numberText = rawText.replace(/\D/g, '')
+        let result = numberText
+        
+        if (allowNegative) {
+            result = handleNegativeValue(rawText, numberText)            
+        }
+
         onChange(Number(result))
     }
 
